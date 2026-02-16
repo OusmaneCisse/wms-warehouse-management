@@ -1,0 +1,30 @@
+# Développement local - PostgreSQL et Redis uniquement
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: wms-postgres-dev
+    environment:
+      POSTGRES_USER: wms
+      POSTGRES_PASSWORD: wms
+      POSTGRES_DB: wms
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wms -d wms"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: wms-redis-dev
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_dev_data:
