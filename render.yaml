@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: wms-backend
+    env: node
+    repo: https://github.com/OusmaneCisse/wms-warehouse-management.git
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: 07b251afc73a5709d7ab6c0c33b2cc2d865b4f594ed593f1a92547f75ad83c12fb0121c314977bb7a82f23bcbf06f974238361027490b1e41aaab9bb828ca3e1
+      - key: CORS_ORIGIN
+        value: https://wms-warehouse-management.vercel.app
