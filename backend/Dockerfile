@@ -3,10 +3,10 @@ FROM node:18-alpine
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --production
+RUN npm install
 
 COPY . .
-RUN npx nest build
+RUN npm run build
 
 EXPOSE 3000
 
