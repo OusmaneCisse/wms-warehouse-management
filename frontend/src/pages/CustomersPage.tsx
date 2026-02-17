@@ -46,7 +46,7 @@ export default function CustomersPage() {
           + Nouveau client
         </button>
       </div>
-      <input type="search" placeholder="Rechercher..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} style={{ marginBottom: '1rem', maxWidth: 300, padding: '0.5rem' }} />
+      <input type="search" placeholder="Rechercher..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} className={styles.searchInput} />
       {showForm && (
         <div className={styles.overlay} onClick={() => setShowForm(false)}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>

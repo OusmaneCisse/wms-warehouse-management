@@ -46,7 +46,7 @@ export default function SuppliersPage() {
           + Nouveau fournisseur
         </button>
       </div>
-      <input type="search" placeholder="Rechercher..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} className={styles.row} style={{ marginBottom: '1rem', maxWidth: 300 }} />
+      <input type="search" placeholder="Rechercher..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} className={styles.searchInput} />
       {showForm && (
         <div className={styles.overlay} onClick={() => setShowForm(false)}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
