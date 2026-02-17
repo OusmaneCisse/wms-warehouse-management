@@ -2,7 +2,62 @@
 
 Application web de gestion d'entrepôt complète, prête pour la production.
 
-## 📁 Structure du projet
+## � Installation Rapide
+
+### Prérequis
+- Node.js >= 18.0.0
+- npm >= 8.0.0
+
+### Installation en 3 étapes
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/OusmaneCisse/wms-warehouse-management.git
+cd wms-warehouse-management
+
+# 2. Installer le backend
+cd backend
+npm install
+cp .env.example .env
+npm run start:dev
+
+# 3. Installer le frontend (dans un autre terminal)
+cd ../frontend
+npm install
+echo "VITE_API_URL=http://localhost:3000/api/v1" > .env
+npm run dev
+```
+
+### Accès rapide
+- **Frontend** : http://localhost:5173
+- **Backend API** : http://localhost:3000
+- **Login par défaut** : admin@wms.com / admin123
+
+---
+
+## 📚 Documentation complète
+
+📖 **[Guide d'installation détaillé](INSTALLATION.md)**
+
+---
+
+## 🌐 Déploiement en production
+
+### Vercel (Frontend)
+```bash
+npm i -g vercel
+vercel --prod
+```
+
+### Railway (Backend)
+```bash
+npm i -g @railway/cli
+railway login
+railway up
+```
+
+---
+
+## �📁 Structure du projet
 
 ```
 wms-warehouse-management/
