@@ -11,10 +11,14 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    console.log('Tentative de login avec:', { email, password });
+    console.log('URL API:', import.meta.env.VITE_API_URL);
     try {
       await login(email, password);
+      console.log('Login réussi, redirection vers dashboard');
       window.location.href = '/dashboard';
     } catch (err: unknown) {
+      console.error('Erreur de login:', err);
       const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
       setError(msg || 'Échec de la connexion');
     }
