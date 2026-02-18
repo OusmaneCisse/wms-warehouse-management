@@ -4,14 +4,14 @@
   "outputDirectory": "frontend/dist",
   "installCommand": "npm install",
   "functions": {
-    "api/vercel-minimal.ts": {
+    "api/vercel-simple.ts": {
       "maxDuration": 30
     }
   },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/vercel-minimal.ts"
+      "dest": "/api/vercel-simple.ts"
     },
     {
       "src": "/(.*)",

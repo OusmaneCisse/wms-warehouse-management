@@ -7,13 +7,10 @@ let app: any;
 
 async function bootstrap() {
   if (!app) {
-    // Set environment for Vercel
-    process.env.NODE_ENV = 'production';
-    
     app = await NestFactory.create(AppModule);
     
     app.enableCors({
-      origin: process.env.CORS_ORIGIN?.split(',') || ['https://wms-warehouse-management.vercel.app'],
+      origin: '*',
       credentials: true,
     });
 
