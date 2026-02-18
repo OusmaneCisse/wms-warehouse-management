@@ -11,4 +11,21 @@ export default defineConfig({
             },
         },
     },
+    build: {
+        outDir: 'dist',
+        assetsDir: 'assets',
+        assetsInlineLimit: 0,
+        rollupOptions: {
+            output: {
+                manualChunks: undefined,
+                assetFileNames: function (assetInfo) {
+                    if (assetInfo.name === 'main') {
+                        return "assets/[name].[hash][extname]";
+                    }
+                    return "assets/[name].[extname]";
+                }
+            }
+        }
+    },
+    base: './',
 });
