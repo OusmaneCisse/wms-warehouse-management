@@ -8,6 +8,10 @@
       "dest": "/api/vercel-simple.ts"
     },
     {
+      "src": "/test-login",
+      "dest": "/api/test-login.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/frontend/dist"
     }

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Login API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        button {
+            background: #38bdf8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .result {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .error {
+            background: #7f1d1d;
+            color: #fca5a5;
+        }
+        .success {
+            background: #14532d;
+            color: #86efac;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Login API</h1>
+        <button onclick="testLogin()">Tester /api/v1/auth/login</button>
+        <button onclick="testHealth()">Tester /api/v1</button>
+        <div id="result" class="result">Cliquez sur un bouton pour tester...</div>
+    </div>
+
+    <script>
+        async function testLogin() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Test en cours...';
+            result.className = 'result';
+            
+            try {
+                const response = await fetch('/api/v1/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@wms.com',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                result.className = 'result ' + (response.ok ? 'success' : 'error');
+                result.innerHTML = `Status: ${response.status} ${response.statusText}\n\nRéponse:\n${JSON.stringify(data, null, 2)}`;
+                
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = `Erreur: ${error.message}`;
+            }
+        }
+        
+        async function testHealth() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Test en cours...';
+            result.className = 'result';
+            
+            try {
+                const response = await fetch('/api/v1');
+                const data = await response.json();
+                
+                result.className = 'result ' + (response.ok ? 'success' : 'error');
+                result.innerHTML = `Status: ${response.status} ${response.statusText}\n\nRéponse:\n${JSON.stringify(data, null, 2)}`;
+                
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = `Erreur: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
