@@ -15,6 +15,10 @@
       "dest": "/api/vercel-simple.ts"
     },
     {
+      "src": "/test",
+      "dest": "/api/test.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/frontend/$1"
     }
