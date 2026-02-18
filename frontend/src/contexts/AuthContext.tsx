@@ -26,7 +26,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem(TOKEN_KEY));
   const [user, setUser] = useState<User | null>(() => {
     const stored = localStorage.getItem(USER_KEY);
-    return stored ? JSON.parse(stored) : null;
+    if (!stored) return null;
+    try {
+      return JSON.parse(stored);
+    } catch (error) {
+      console.error('Erreur parsing user from localStorage:', error);
+      return null;
+    }
   });
   const [isLoading, setIsLoading] = useState(false);
 
