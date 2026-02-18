@@ -7,9 +7,6 @@ let app: any;
 
 async function bootstrap() {
   if (!app) {
-    // Set environment for Vercel
-    process.env.NODE_ENV = 'production';
-    
     app = await NestFactory.create(AppModule);
     
     app.enableCors({
@@ -48,6 +45,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   } catch (error) {
     console.error('Handler error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
 }
