@@ -1,22 +1,21 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install",
+  "functions": {
+    "api/health.ts": {
+      "maxDuration": 10
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/vercel-simple.ts"
+      "dest": "/api/health.ts"
     },
     {
       "src": "/test",
-      "dest": "/api/test.html"
+      "dest": "/api/health.ts"
     },
     {
       "src": "/(.*)",
@@ -24,9 +23,6 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "JWT_SECRET": "07b251afc73a5709d7ab6c0c33b2cc2d865b4f594ed593f1a92547f75ad83c12fb0121c314977bb7a82f23bcbf06f974238361027490b1e41aaab9bb828ca3e1",
-    "CORS_ORIGIN": "https://wms-warehouse-management.vercel.app",
-    "DB_PATH": "/tmp/wms.sqlite"
+    "NODE_ENV": "production"
   }
 }
