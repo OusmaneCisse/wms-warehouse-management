@@ -8,9 +8,19 @@ export class DatabaseSeedService implements OnModuleInit {
 
   async onModuleInit() {
     try {
-      await runSeed(this.dataSource);
+      // Check if database is empty before seeding
+      const userCount = await this.dataSource.query('SELECT COUNT(*) as count FROM users');
+      const count = parseInt(userCount[0]?.count || '0');
+      
+      if (count === 0) {
+        console.log('[Seed] Database empty, running seed...');
+        await runSeed(this.dataSource);
+        console.log('[Seed] Database seeded successfully');
+      } else {
+        console.log('[Seed] Database already contains data, skipping seed');
+      }
     } catch (err) {
-      console.error('[Seed] Erreur:', err);
+      console.error('[Seed] Error checking/seeding database:', err);
     }
   }
 }

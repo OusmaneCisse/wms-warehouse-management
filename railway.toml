@@ -1,0 +1,19 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+healthcheckPath = "/api/v1"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[env]
+NODE_ENV = "production"
+PORT = "3000"
+
+[[services]]
+name = "wms-backend"
+
+[services.variables]
+JWT_SECRET = "votre-secret-super-securise-12345!@#$%"
+CORS_ORIGIN = "https://votre-frontend-vercel.app"

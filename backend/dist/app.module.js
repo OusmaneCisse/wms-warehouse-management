@@ -21,13 +21,14 @@ const warehouses_module_1 = require("./warehouses/warehouses.module");
 const locations_module_1 = require("./locations/locations.module");
 const database_seed_service_1 = require("./database/database-seed.service");
 const databaseConfig = {
-    type: 'better-sqlite3',
-    database: process.env.NODE_ENV === 'production'
+    type: process.env.DATABASE_URL ? 'postgres' : 'better-sqlite3',
+    database: process.env.DATABASE_URL || (process.env.NODE_ENV === 'production'
         ? '/tmp/wms.sqlite'
-        : process.env.DB_PATH || 'data/wms.sqlite',
+        : process.env.DB_PATH || 'data/wms.sqlite'),
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: process.env.NODE_ENV !== 'production',
     logging: process.env.NODE_ENV === 'development',
+    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 };
 let AppModule = class AppModule {
 };
